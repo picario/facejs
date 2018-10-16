@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+
+        .outline {
+            width: 410px;
+            height: 410px;
+            border: 4px gray solid;
+            margin: 5px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+    </nav>
+
+    <main role="main" class="container">
+        <h3>FaceJS <span class="text-muted">Logo Studio Example </span></h3>
+        <p>
+            Choose one of the logo's on top.
+            Drap n drop local image on a scene.
+            Move and zoom textures with mouse.
+        </p>
+        <button onclick="setLogo('logo.png');"><img src="logo.png" height="50px"></button>
+        <button onclick="setLogo('logo250.png');"><img src="logo250.png" height="50px"></button>
+        <br>
+        <br>
+        <canvas id="product1" width="400px" height="400px"></canvas>
+        <canvas id="product2" width="400px" height="400px"></canvas>
+
+    </main>
+
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
+
+
+
+    <script>
+        var c1, c2, c3, c4;
+        var data = [
+            { id: "product1", refId: "1354_flowpack.pfs", logoObject: 1 },
+            { id: "product2", refId: "Baseball-cap.pfs", logoObject: 2 }
+        ];
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+
+            });
+
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                let container = FaceJS.getContainer(item.id);
+                await container.loadSceneFromXpo(item.refId);
+                container.handleTextureMove = true;
+                container.handleTextureDrop = true;
+                container.handleTextureResize = true;
+                container.objects[item.logoObject].repeat = false;
+                container.objects[item.logoObject].sizeMode = 4;
+
+            }
+        }
+
+        function setLogo(name) {
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                let container = FaceJS.getContainer(item.id);
+                container.repeat = false;
+                container.objects[item.logoObject].loadTextureFromUrl(name);
+            }
+        }
+
+        //
+        start();
+    </script>
+
+
+</body>
+
+</html>

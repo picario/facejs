@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <style>
+        /* You can scale a face-canvas with css! But don't change the width/height of the canvas yourself */
+        .full {
+
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .nav-trans {
+            filter: alpha(opacity=80);
+            opacity: 0.8;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <canvas id="mycanvas" width="960px" height="540px" class="full"></canvas>
+
+    <br>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light bg-light nav-trans">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+        <div class="navbar-nav mr-auto">
+            <h3>FaceJS <span class="text-muted">full screen</span> non-aspect-ratio</h3>
+        </div>
+        <div class="form-inline mt-2 mt-md-0">
+            <button class="btn my-2 my-sm-0" id="next" onclick="nextScene();">next</button>
+        </div>
+    </nav>
+
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
+
+
+    <script>
+        var container;
+        var curobject = null;
+
+        let sceneIndex = 0;
+        let sceneIds = [
+            "BM Slaapkamer Wave.pfs",
+            "1154_stone-floor-tiles-buckland-stone-in-a-living-room.pfs",
+            "scenes249_Volkswagen-Golf.pfs"
+        ];
+
+        async function nextScene() {
+            sceneIndex++;
+            if (sceneIndex > sceneIds.length - 1) { sceneIndex = 0; }
+            await container.loadSceneFromXpo(sceneIds[sceneIndex]);
+        }
+
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+                canvas: "mycanvas",
+                autorender: true
+            });
+            
+            container = FaceJS.getContainer("mycanvas");
+
+            await container.loadSceneFromXpo(sceneIds[0]);
+
+            //you can access the canvas with container.canvas
+            container.canvas.addEventListener("mousemove", mousemove);
+        }
+
+        function mousemove(evt) {
+            //look for an object, if any.. 
+            var newcurobject = container.getObjectFromEvent(evt);
+
+            //only react when something changed..
+            if (newcurobject != curobject) {
+                if (newcurobject == null) {
+                    container.render();
+                } else {
+                    newcurobject.highlight = true;
+                }
+            }
+            curobject = newcurobject;
+        }
+
+        //
+        start();
+    </script>
+
+
+</body>
+
+</html>

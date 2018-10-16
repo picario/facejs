@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <script src="colpick.js"></script>
+    <style> 
+      
+        .full {
+           /* body {  min-height: 75rem; padding-top: 4.5rem; }  */
+          display:block;
+            width:100%;
+            height:100%;
+            position: absolute;
+            z-index: -1;
+        }
+        .nav-trans {
+            filter: alpha(opacity=80);
+            opacity: 0.8;
+        }
+        .rightdiv {
+            background-color:lightsteelblue;
+            border:1px gray;
+            width:320px;
+            position:absolute;
+            right: 50px;
+            top:100px;
+            margin:2px;
+            
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <canvas id="destScene" width="960px" height="540px" class="full"></canvas>
+
+    <br>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+        <div class="navbar-nav mr-auto">
+            <h3>FaceJS <span class="text-muted">Scene to Scene</span></h3>
+        </div>
+    </nav>
+   
+    <div class="rightdiv">
+        <canvas id="sourceScene" width="300px" height="300px" style="margin: 10px;"></canvas>
+        <canvas id="color-picker1"></canvas>
+        <input id="color1" hidden />
+        <canvas id="color-picker2"></canvas>
+        <input id="color2" hidden />
+    </div>
+
+
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
+   
+
+    <script> 
+        var srcContainer;
+        var dstContainer;
+        var c1,c2;
+    
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+                autorender: false //on purpose for this demo.
+            });
+            
+            srcContainer = FaceJS.getContainer("sourceScene");
+            dstContainer = FaceJS.getContainer("destScene");
+
+          
+            c1 = new KellyColorPicker({
+              place : 'color-picker1', 
+              size : 100, 
+              input : 'color1',  
+              color : '#fff0a050',  
+             userEvents : { change : function() { redraw();} }
+             });
+            c2 = new KellyColorPicker({
+              place : 'color-picker2', 
+              size : 100, 
+             input : 'color2',  
+             color : '#ff50a0ff',
+             userEvents : { change : function() {redraw();} }
+             });
+
+            await srcContainer.loadSceneFromXpo("Surface-effect-scaled-50.pfs");
+            await dstContainer.loadSceneFromXpo("3041_A-01.pfs");
+           
+            dstContainer.objects[4].repeat=true;
+            dstContainer.objects[4].width=1000;
+            dstContainer.objects[4].height=800;
+            
+            //Leave width/height unchanged when applying a new texture.
+            dstContainer.objects[4].sizeMode=1; 
+            
+
+            c1.setColorByHex("#a03030");
+            c2.setColorByHex("#30a0a0");
+
+            dstContainer.handleTextureResize=true;
+            dstContainer.handleTextureMove=true;
+            dstContainer.handleTextureDrop=true;
+            
+        };
+
+        function redraw(){
+            if (!c1) {return;}
+            if (!c2) {return;}
+            let col1 = c1.getCurColorRgba();
+            let col2 = c2.getCurColorRgba();
+
+            //change colors on the source scene 
+            srcContainer.objects[0].setColorByArgb(255,col1.r,col1.g,col1.b);
+            srcContainer.objects[1].setColorByArgb(255,col2.r,col2.g,col2.b);
+            srcContainer.render();
+
+            //apply source scene as texture on destination scene
+            dstContainer.objects[4].loadTextureFromElem(srcContainer.canvas);
+            dstContainer.render();
+
+        }
+
+        //
+        start();
+    </script>
+
+
+</body>
+
+</html>

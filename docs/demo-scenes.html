@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <style> body {  min-height: 75rem; padding-top: 4.5rem; } 
+        canvas { margin:5px; }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+    </nav>
+
+    <main role="main" class="container">
+        <h3>FaceJS <span class="text-muted">multiple scenes</span></h3>
+        <h5 id="info">Press add for a new scene.</h5>
+        <h6>Scene <button id="add">Add</button> </h6>
+        <div id="scenes"> 
+        </div>
+    </main>
+
+    
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
+
+    <script>
+        var container;
+        var curobject=null; 
+        let sceneName = "scenes999_Suit.pfs";
+        let items = [];
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+                autorender: true
+            });
+            
+            //make sure you add event handlers AFTER init, to prevent actions before init.
+            let button = document.getElementById("add");
+            button.addEventListener("click", addScene);
+        };
+
+        async function addScene() {
+            if (items.length>10) {
+                alert('I think that is enough for now...');
+                return;
+            } 
+            //create canvas
+            let can = document.createElement("canvas");
+            can.width = 400;
+            can.height = 400;
+            //add it to the DOM
+            document.getElementById("scenes").appendChild(can);
+            //attach FaceJS to this canvas
+            let con  = FaceJS.getContainer(can);
+            //and load a scene into it.
+            await con.loadSceneFromXpo(sceneName);
+            con.autorender=true;
+            items.push(con);
+        }
+
+        function drawRandomColors() {
+            if (items.length>0) 
+            {
+                let index = Math.trunc(Math.random() *items.length);
+                let mycon = items[index];
+                mycon.objects[0].setColorByArgb(255,Math.round(Math.random()*255),Math.round(Math.random()*255),Math.round(Math.random()*255));
+            }
+            window.requestAnimationFrame(drawRandomColors);
+        };
+
+      
+        //
+        start();
+        drawRandomColors();
+    </script>
+
+
+</body>
+
+</html>

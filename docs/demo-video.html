@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+
+        .outline {
+            width: 410px;
+            height: 410px;
+            border: 4px gray solid;
+            margin: 5px;
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+        <button id="play" onclick="toggleVideo()">Play/Pause </button>
+    </nav>
+    <br>
+    <canvas id="mycanvas" width="800px" height="800px"></canvas>
+
+    <video src="video.mp4" controls loop width="640px" height="480px" id="myvideo"> </video>
+
+    
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
+
+    <script>
+        var fc; //hold the FaceContainer.
+        var vid;
+        var objectNr = 4;
+
+        function toggleVideo() {
+            if (vid.paused) { vid.play(); }
+            else { vid.pause(); }
+
+        }
+
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+                canvas: "mycanvas",
+                autorender: true
+            });
+
+            fc = document.getElementById("mycanvas").container;
+            await fc.loadSceneFromXpo("3041_A-01.pfs");
+
+
+            fc.objects[objectNr].repeat = false;
+            fc.objects[objectNr].sizeMode = 4;
+            fc.objects[objectNr].placingPointX = 0;
+            fc.objects[objectNr].placingPointY = 1;
+
+            fc.handleTextureResize = true;
+            fc.handleTextureMove = true;
+            fc.handleTextureDrop = true;
+
+
+            vid = document.getElementById("myvideo");
+            loop();
+        }
+
+
+        function loop() {
+
+            if (!(vid.paused || vid.ended)) {
+                fc.objects[objectNr].loadTextureFromElem(vid);
+                //    fc.objects[2].width=900;
+                //    fc.objects[2].height=700;
+            }
+            window.requestAnimationFrame(loop);
+        }
+
+        //
+        start();
+    </script>
+
+
+</body>
+
+</html>

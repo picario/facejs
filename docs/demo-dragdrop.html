@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
+    <style>
+        body {
+            min-height: 75rem;
+            padding-top: 4.5rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">
+            <img src=logo125.png />
+        </a>
+    </nav>
+
+    <main role="main" class="container">
+        <h3>FaceJS <span class="text-muted">drag and drop</span></h3>
+        <h5 id="info">Drag n drop a local image on the scene.</h5>
+
+        <canvas id="mycanvas" width="960px" height="540px" oncontextmenu="event.preventDefault();"></canvas>
+    </main>
+
+        <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+        <script>
+            if (!FaceJS.isSupported) {
+                alert("FaceJS is not supported. Please use a modern browser.")
+            }
+        </script>
+
+    <script>
+        var container;
+
+        async function start() {
+            await FaceJS.init("https://demo.picarioxpo.com/", {
+                canvas: "mycanvas",
+                autorender: true,
+                scene: "scenes68_Wood_flooring_3.pfs"
+            });
+
+            container = FaceJS.getContainer("mycanvas");
+            for (let i = 0; i < container.objects.length; i++) {
+                const fo = container.objects[i];
+                fo.repeat = true;
+                fo.width = 500;
+                fo.height = 500;
+            }
+
+            container.handleTextureMove = true;
+            container.handleTextureResize = true;
+            //manual drag/drop support instead of handleTextureDrop=true;
+            container.canvas.addEventListener("drop", dropHandler);
+            container.canvas.addEventListener("dragover", dragOverHandler);
+        }
+
+
+        function dropHandler(ev) {
+            ev.preventDefault();
+            var file;
+            if (ev.dataTransfer.items) {
+                if (ev.dataTransfer.items[0].kind === 'file') {
+                    file = ev.dataTransfer.items[0].getAsFile();
+                }
+            } else {
+                // Use DataTransfer interface to access the file(s)
+                file = ev.dataTransfer.files[0];
+            }
+            //check if there is a file dropped..
+            if (file) {
+                //get the object, if any, based on the mouseevent data. 
+                let dropObject = container.getObjectFromEvent(ev);
+                if (dropObject) {
+                    dropObject.loadTextureFromElem(file);
+                }
+            }
+        }
+
+        function dragOverHandler(ev) {
+            ev.preventDefault();
+        }
+
+        //
+        start();
+    </script>
+
+
+</body>
+
+</html>
