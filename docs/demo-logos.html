@@ -42,6 +42,8 @@
         <button onclick="setLogo('logo.png');"><img src="logo.png" height="50px"></button>
         <button onclick="setLogo('logo250.png');"><img src="logo250.png" height="50px"></button>
         <br>
+        <label for="rotation">rotation</label>
+        <input type="range" id="rotation" name="rotation" min="0" max="359" step="1" value=0 />
         <br>
         <canvas id="product1" width="400px" height="400px"></canvas>
         <canvas id="product2" width="400px" height="400px"></canvas>
@@ -59,6 +61,7 @@
 
     <script>
         var c1, c2, c3, c4;
+        var rot;
         var data = [
             { id: "product1", refId: "1354_flowpack.pfs", logoObject: 1 },
             { id: "product2", refId: "Baseball-cap.pfs", logoObject: 2 }
@@ -80,6 +83,9 @@
                 container.objects[item.logoObject].sizeMode = 4;
 
             }
+            //rotation control
+            rot = document.getElementById("rotation");
+            rot.addEventListener("input", rotChanged);
         }
 
         function setLogo(name) {
@@ -90,6 +96,19 @@
                 container.objects[item.logoObject].loadTextureFromUrl(name);
             }
         }
+
+        function rotChanged(){
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                let container = FaceJS.getContainer(item.id);
+                if (container.objects[item.logoObject])
+                {
+                    container.objects[item.logoObject].rotation = parseInt(rot.value);
+                }
+                
+            }
+        }
+
 
         //
         start();
