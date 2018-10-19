@@ -86,17 +86,20 @@
 
         function mousemove(evt) {
             //look for an object, if any.. 
-            var newcurobject = container.getObjectFromEvent(evt);
+            var newobject = container.getObjectFromEvent(evt);
 
             //only react when something changed..
-            if (newcurobject != curobject) {
-                if (newcurobject == null) {
+            if (newobject != curobject) {
+                if (curobject !=null)  {
+                    curobject.highlight=false;
                     container.render();
-                } else {
-                    newcurobject.highlight = true;
-                }
+                    }
+                if (newobject != null) {
+                    newobject.highlight=true;
+                  
+                 }                
             }
-            curobject = newcurobject;
+            curobject = newobject;
         }
 
         //
