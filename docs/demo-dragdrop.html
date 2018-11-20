@@ -3,40 +3,111 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaceJS demo</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous" />
-    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
-    <style>
-        body {
-            min-height: 75rem;
-            padding-top: 4.5rem;
-        }
-    </style>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"></script>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="#">
-            <img src=logo125.png />
-        </a>
+        <div>
+            <a class="navbar-brand m-0 p-0" href="index.html">
+                <h3>PicarioXPO<span class="text-muted">Live</span></h3>
+            </a>
+            <p class="navtext">Realtime in-browser visualisation interaction</p>
+        </div>
     </nav>
 
-    <main role="main" class="container">
-        <h3>FaceJS <span class="text-muted">drag and drop</span></h3>
-        <h5 id="info">Drag n drop a local image on the scene.</h5>
-
-        <canvas id="mycanvas" width="960px" height="540px" oncontextmenu="event.preventDefault();"></canvas>
+    <main class="dragdrop container">
+        
+        <!-- <h3>FaceJS <span class="text-muted">drag and drop</span></h3> -->
+        <div class="row ml-0">
+            <p class="options"><i class="fas fa-mouse-pointer"></i> Drag & Drop your local images </p><p class="options pr-3"><i class="fas fa-arrows-alt pl-3"></i> Move your logo </p><p class="options"><i class="fas fa-arrows-alt-v"></i> Zoom in / Zoom out</p>
+        </div>
+        <p>Hier kan dan een kort beschrijving staan van de demo. Vertel even wat er allemaal kan. Visual vloeren met behoud van reflectie, schaduw etc.</p>
+        
+        <div class="no-margin row">
+            <canvas id="mycanvas" class="fullscreenDemo" width="1060px" height="640px" oncontextmenu="event.preventDefault();"></canvas>
+            <div class="dragdropimages">
+                <p><img src="../img/floor1.png" alt="floor"></p>
+                <p><img src="../img/floor2.png" alt="floor"></p>
+                <p class="options"><i class="fas fa-mouse-pointer"></i> Drag & Drop your local images </p>
+            </div>
+        </div>
+        <div class="row links">
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Logo</h5>
+                <div class="linkPicture non-fullscreen" style="background-image:url('../img/Logo.png')">
+                    <a href="demo-logos.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Scene2Scene</h5>
+                <div class="linkPicture" style="background-image:url('../img/Scene2Scene.png')">
+                    <a href="demo-scene2scene.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Multiple scenes</h5>
+                <div class="linkPicture" style="background-image:url('../img/MultiplesScenes.png')">
+                    <a href="demo-scenes.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Text</h5>
+                <div class="linkPicture non-fullscreen" style="background-image:url('../img/Text.png')">
+                    <a href="demo-text.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Video as texture</h5>
+                        <div class="linkPicture" style="background-image:url('../img/VideoAsTexture.png')">
+                    <a href="demo-video.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Full screen</h5>
+                <div class="linkPicture" style="background-image:url('../img/FullScreen.png')">
+                    <a href="demo-fullscreen.html"></a>
+                </div>
+            </section>
+        </div>
     </main>
 
-        <!-- IsSupported detection in seperate script tag, in case main script fails. -->
-        <script>
-            if (!FaceJS.isSupported) {
-                alert("FaceJS is not supported. Please use a modern browser.")
-            }
-        </script>
+    <footer class="row">
+        <div>
+            <img src="logo250.png" alt="picario logo">
+        </div>
+        <div>
+            <p>
+                <span class="font-weight-bold">THE GREATEST XPO UPDATE EVER!THE GREATEST XPO UPDATE EVER!</span><br>
+                AVAILABLE on the <span class="font-weight-bold">19th of November</span><br>
+                in EVERY XPO with an Render API 
+            </p>
+            <p class="">Read more at www.picario.com/xpolive</p>
+        </div>
+        <div>
+            <p>
+                Realtime browser rendering, featuring: <br>
+                - in browser interactions <br>
+                - drag and drop dessins <br>
+                - move and zoom dessins <br>
+                - image and tekst positioning
+            </p>
+        </div>
+    </footer>
+    
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
 
     <script>
         var container;
@@ -63,13 +134,26 @@
             container.canvas.addEventListener("dragover", dragOverHandler);
         }
 
-
         function dropHandler(ev) {
             ev.preventDefault();
             var file;
+            var url;
             if (ev.dataTransfer.items) {
                 if (ev.dataTransfer.items[0].kind === 'file') {
                     file = ev.dataTransfer.items[0].getAsFile();
+                } else if (ev.dataTransfer.items[0].type === 'text/plain') {
+                    file = ev.dataTransfer.items[0].getAsString((url) => {
+                        if(url){
+                            let dropObject = container.getObjectFromEvent(ev);
+                            if (dropObject) {
+                                dropObject.loadTextureFromUrl(url).then(() => {
+
+                                }).catch((err) =>{
+                                    console.log(JSON.stringify(err));
+                                });
+                            }
+                        }
+                    })  
                 }
             } else {
                 // Use DataTransfer interface to access the file(s)
@@ -89,10 +173,8 @@
             ev.preventDefault();
         }
 
-        //
         start();
     </script>
-
 
 </body>
 
