@@ -36,6 +36,7 @@
             <div class="dragdropimages">
                 <p><img src="../img/floor1.png" alt="floor"></p>
                 <p><img src="../img/floor2.png" alt="floor"></p>
+                <p><img src="../img/floor3.png" alt="floor"></p>
                 <p class="options"><i class="fas fa-mouse-pointer"></i> Drag & Drop your local images </p>
             </div>
         </div>
@@ -123,8 +124,8 @@
             for (let i = 0; i < container.objects.length; i++) {
                 const fo = container.objects[i];
                 fo.repeat = true;
-                fo.width = 500;
-                fo.height = 500;
+                fo.width = 1400;
+                fo.height = 1400;
             }
 
             container.handleTextureMove = true;
@@ -145,9 +146,9 @@
                     file = ev.dataTransfer.items[0].getAsString((url) => {
                         if(url){
                             let dropObject = container.getObjectFromEvent(ev);
+                            dropObject.sizeMode = 1;
                             if (dropObject) {
                                 dropObject.loadTextureFromUrl(url).then(() => {
-
                                 }).catch((err) =>{
                                     console.log(JSON.stringify(err));
                                 });
@@ -164,6 +165,7 @@
                 //get the object, if any, based on the mouseevent data. 
                 let dropObject = container.getObjectFromEvent(ev);
                 if (dropObject) {
+                    dropObject.sizeMode = 1;
                     dropObject.loadTextureFromElem(file);
                 }
             }
