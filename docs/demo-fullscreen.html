@@ -3,46 +3,34 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaceJS demo</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous" />
-    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
-    <style>
-        /* You can scale a face-canvas with css! But don't change the width/height of the canvas yourself */
-        .full {
-
-            display: block;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: -1;
-        }
-
-        .nav-trans {
-            filter: alpha(opacity=80);
-            opacity: 0.8;
-        }
-    </style>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"></script>
+    <script src="colpick.js"></script>
 </head>
 
 <body>
 
-    <canvas id="mycanvas" width="960px" height="540px" class="full"></canvas>
-
-    <br>
-
-    <nav class="navbar navbar-expand-lg bnavbar-light bg-light nav-trans">
-        <a class="navbar-brand" href="#">
-            <img src=logo125.png />
-        </a>
-        <div class="navbar-nav mr-auto">
-            <h3>FaceJS <span class="text-muted">full screen</span> non-aspect-ratio</h3>
+    <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light nav-trans">
+        <div class="mr-auto">
+            <a class="navbar-brand m-0 p-0" href="index.html">
+                <h3>PicarioXPO<span class="text-muted">Live</span></h3>
+            </a>
+            <p class="navtext">Realtime in-browser visualisation interaction</p>
         </div>
         <div class="form-inline mt-2 mt-md-0">
             <button class="btn my-2 my-sm-0" id="next" onclick="nextScene();">next</button>
         </div>
     </nav>
+
+    <main class="m-0">
+        <canvas id="mycanvas" width="960px" height="540px" class="full"></canvas>
+    </main>
+
 
     <!-- IsSupported detection in seperate script tag, in case main script fails. -->
     <script>
@@ -50,7 +38,6 @@
             alert("FaceJS is not supported. Please use a modern browser.")
         }
     </script>
-
 
     <script>
         var container;
@@ -102,10 +89,8 @@
             curobject = newobject;
         }
 
-        //
         start();
     </script>
-
 
 </body>
 

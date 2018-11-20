@@ -3,69 +3,136 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <title>FaceJS Text demo</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous" />
-    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"> </script>
-    <style>
-        body {
-            min-height: 75rem;
-            padding-top: 4.5rem;
-        }
-        .outline {
-            width: 410px;
-            height: 410px;
-            border: 4px gray solid;
-            margin: 5px;
-        }
-        .border {
-            border: 1px black solid;
-        }
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceJS demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script type="text/javascript" src="https://demo.picarioxpo.com/facejs/facelib-0-9-1.js"></script>
 </head>
 
 <body>
 
     <nav class="navbar navbar-expand-lg bnavbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="#">
-            <img src=logo125.png />
-        </a>
+        <div>
+            <a class="navbar-brand m-0 p-0" href="index.html">
+                <h3>PicarioXPO<span class="text-muted">Live</span></h3>
+            </a>
+            <p class="navtext">Realtime in-browser visualisation interaction</p>
+        </div>
     </nav>
 
-    <main role="main" class="container">
-        <h3>FaceJS <span class="text-muted">Text Example </span></h3>
-        <input type="text" id="textinput" value="Hello World" onchange="update();" />
-        <select id="fontname" onchange="update();">
-            <option value="Georgia" selected>Georgia</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Helvetica">Helvetica</option>
-        </select>
-        <select id="sizemode" onchange="update();">
-            <option value="0" selected>Normal</option>
-            <option value="2">Surface Map</option>
-            <option value="3">Surface Fill</option>
-            <option value="4">Surface Fit</option>
-        </select>
-          
-        <label for="repeat">Repeat</label>
-        <input type="checkbox" id="repeat" value="1" name="repeat" onchange="update();" />
-        <label for="bold">Bold</label>
-        <input type="checkbox" id="bold" value="1" name="bold" onchange="update();" />
-        <label for="italic">Italic</label>
-        <input type="checkbox" id="italic" value="1" name="italic" onchange="update();"/>
-        
+    <main class="demoText container">
+        <div class="row ml-0">
+            <p class="options"><i class="fas fa-mouse-pointer"></i> Drag & Drop your local images </p><p class="options pr-3"><i class="fas fa-arrows-alt pl-3"></i> Move your logo </p><p class="options"><i class="fas fa-arrows-alt-v"></i> Zoom in / Zoom out</p>
+        </div>
+        <p>Hier kan dan een kort beschrijving staan van de demo. Vertel even wat er allemaal kan. Visual vloeren met behoud van reflectie, schaduw etc.</p>
+        <div class="row">
+            <div class="form-group"> 
+                <input class="form-control" type="text" id="textinput" value="Hello World" onchange="update();" />
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="fontname" onchange="update();">
+                    <option value="Georgia" selected>Georgia</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Helvetica">Helvetica</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control" id="sizemode" onchange="update();">
+                    <option value="0" selected>Normal</option>
+                    <option value="2">Surface Map</option>
+                    <option value="3">Surface Fill</option>
+                    <option value="4">Surface Fit</option>
+                </select>
+            </div>
+            <div class="mr-2">
+                <input type="checkbox" id="repeat" value="1" name="repeat" onchange="update();" />
+                <label for="repeat">Repeat</label>
+            </div>  
+            <div class="mr-2">
+                <input type="checkbox" id="bold" value="1" name="bold" onchange="update();" />
+                <label for="bold">Bold</label>
+            </div> 
+            <div class="mr-2">
+                <input type="checkbox" id="italic" value="1" name="italic" onchange="update();"/>
+                <label for="italic">Italic</label>
+            </div>
+        </div>
+            
         <br>
         <canvas id="canvas" width="800px" height="800px"></canvas>
         <div id="info"></div>
+        <div class="row links">
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <h5><span class="text-muted">Demo:</span> Drag drop demo</h5>
+                <div class="linkPicture non-fullscreen" style="background-image:url('../img/DragDropDemo.png')">
+                    <a href="demo-dragdrop.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Logo</h5>
+                <div class="linkPicture non-fullscreen" style="background-image:url('../img/Logo.png')">
+                    <a href="demo-logos.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Scene2Scene</h5>
+                <div class="linkPicture" style="background-image:url('../img/Scene2Scene.png')">
+                    <a href="demo-scene2scene.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Multiple scenes</h5>
+                <div class="linkPicture" style="background-image:url('../img/MultiplesScenes.png')">
+                    <a href="demo-scenes.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Video as texture</h5>
+                        <div class="linkPicture" style="background-image:url('../img/VideoAsTexture.png')">
+                    <a href="demo-video.html"></a>
+                </div>
+            </section>
+            <section class="demoLink col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <h5><span class="text-muted">Demo:</span> Full screen</h5>
+                <div class="linkPicture" style="background-image:url('../img/FullScreen.png')">
+                    <a href="demo-fullscreen.html"></a>
+                </div>
+            </section>
+        </div>
     </main>
 
-        <!-- IsSupported detection in seperate script tag, in case main script fails. -->
-        <script>
-            if (!FaceJS.isSupported) {
-                alert("FaceJS is not supported. Please use a modern browser.")
-            }
-        </script>
+    <footer class="row">
+        <div>
+            <img src="logob&w.png" alt="picario logo">
+        </div>
+        <div>
+            <p>
+                <span class="font-weight-bold">THE GREATEST XPO UPDATE EVER!THE GREATEST XPO UPDATE EVER!</span><br>
+                AVAILABLE on the <span class="font-weight-bold">19th of November</span><br>
+                in EVERY XPO with an Render API 
+            </p>
+            <p class="">Read more at www.picario.com/xpolive</p>
+        </div>
+        <div>
+            <p>
+                Realtime browser rendering, featuring: <br>
+                - in browser interactions <br>
+                - drag and drop dessins <br>
+                - move and zoom dessins <br>
+                - image and tekst positioning
+            </p>
+        </div>
+    </footer>
+
+    <!-- IsSupported detection in seperate script tag, in case main script fails. -->
+    <script>
+        if (!FaceJS.isSupported) {
+            alert("FaceJS is not supported. Please use a modern browser.")
+        }
+    </script>
 
     <script>
 
@@ -91,7 +158,6 @@
                 scene: myscene
             });
 
-
             container = FaceJS.getContainer("canvas");
 
             //default startup values of the Text demo.
@@ -106,7 +172,6 @@
             container.handleTextureResize = false;
         }
 
-        //
         start();
 
         function update() {
@@ -120,8 +185,6 @@
                 displaySizes();
             }
         }
-
-    
 
         //Display's the sizing information used
         function displaySizes() {

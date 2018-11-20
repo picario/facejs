@@ -1,0 +1,240 @@
+/* Main styling */
+main {
+  min-height: calc(100vh - 308px); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold; }
+
+p {
+  font-family: sans-serif;
+  color: #707070;
+  font-size: 14px;
+  line-height: 16px; }
+
+.navtext {
+  font-size: 19px;
+  margin-bottom: 0; }
+
+nav div {
+  margin-left: 30px; }
+
+.navbar-brand h3 {
+  font-size: 40px;
+  color: black;
+  margin-bottom: 2px; }
+
+main {
+  margin-top: 102px; }
+
+p.options {
+  color: black; }
+  @media (max-width: 391px) {
+    p.options {
+      width: 100%; }
+      p.options i {
+        padding-left: 0 !important; } }
+
+p.options i {
+  font-size: 22px; }
+
+.non-fullscreen {
+  background-position: center;
+  background-size: contain; }
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important; }
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px 75px;
+  background-color: #000000; }
+  footer div {
+    margin-right: 50px; }
+    @media (max-width: 991.98px) {
+      footer div {
+        margin-top: 25px; } }
+    footer div img {
+      width: 300px; }
+    footer div p {
+      line-height: 20px;
+      color: #FFFFFF; }
+
+/* Home styling */
+section.home {
+  margin: 40px 0;
+  height: 175px;
+  display: flex;
+  flex-direction: row; }
+  section.home .demoPicture {
+    margin-right: 25px;
+    height: 175px;
+    width: 275px !important;
+    min-width: 275px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 6px; }
+  section.home img {
+    float: left;
+    height: 150px;
+    border-radius: 8px; }
+  section.home .demoInfo {
+    position: relative; }
+  section.home h5 {
+    font-size: 30px;
+    font-weight: bold; }
+    section.home h5 span {
+      font-size: 30px;
+      font-weight: 100; }
+
+@media (max-width: 991.98px) {
+  section.home {
+    height: auto; }
+    section.home .demoPicture {
+      height: 250px;
+      flex: 0 0 100% !important;
+      max-width: 100% !important; }
+    section.home .demoInfo {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+      margin-top: 20px;
+      height: 180px; } }
+
+@media (max-width: 600px) {
+  .demoPicture {
+    height: 175px !important; }
+  .demoInfo {
+    height: 235px !important; } }
+
+/* Links */
+.links {
+  max-width: 942px;
+  margin-left: -15px !important; }
+  @media (max-width: 576px) {
+    .links {
+      margin: 0; } }
+
+section.demoLink {
+  margin-top: 50px;
+  min-width: 225px; }
+  section.demoLink .linkPicture {
+    position: relative;
+    height: 140px;
+    width: 225px !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 5px; }
+    section.demoLink .linkPicture a {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0; }
+
+/* Main view demo */
+.p-m {
+  margin-left: -15px !important;
+  margin-bottom: 20px !important; }
+  @media (max-width: 576px) {
+    .p-m {
+      margin: 0 0 20px 0 !important; } }
+
+@media (max-width: 991.98px) {
+  #canvas {
+    width: 100%;
+    height: 550px; } }
+
+@media (max-width: 768px) {
+  #canvas {
+    height: 400px; } }
+
+@media (max-width: 480px) {
+  #canvas {
+    height: 300px; } }
+
+/* Drag and drop */
+@media (max-width: 991.98px) {
+  main.dragdrop #mycanvas {
+    width: 100%;
+    height: 550px; } }
+
+@media (max-width: 768px) {
+  main.dragdrop #mycanvas {
+    height: 400px; } }
+
+@media (max-width: 480px) {
+  main.dragdrop #mycanvas {
+    height: 300px; } }
+
+main.dragdrop .dragdropimages {
+  width: 100px;
+  margin: 0 0 0 20px;
+  flex-wrap: wrap; }
+  @media (max-width: 1199px) {
+    main.dragdrop .dragdropimages {
+      margin: 20px 0 0 0;
+      width: auto;
+      display: flex; }
+      main.dragdrop .dragdropimages p {
+        margin: 0 20px 0 0; } }
+  main.dragdrop .dragdropimages p {
+    font-size: 12px;
+    margin-bottom: 20px; }
+    main.dragdrop .dragdropimages p i {
+      font-size: 20px; }
+
+main.dragdrop img {
+  width: 100px;
+  height: 100px; }
+
+/* Logo */
+.demoLogo img {
+  cursor: pointer; }
+
+.demoLogo #product2 {
+  width: 500px; }
+
+/* Scene2scene */
+.scene2scene {
+  margin-top: 0 !important; }
+
+.full {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1; }
+
+.nav-trans {
+  filter: alpha(opacity=80);
+  opacity: 0.8; }
+
+.rightdiv {
+  background-color: lightsteelblue;
+  border: 1px gray;
+  width: 320px;
+  position: absolute;
+  right: 18px;
+  top: 100px;
+  margin: 2px; }
+
+/* Multiple scenes */
+#scenes canvas {
+  margin-right: 10px; }
+
+/* Demo text */
+.demoText .row .form-group {
+  margin-right: 15px; }
+  .demoText .row .form-group input, .demoText .row .form-group select {
+    max-width: 250px; }
+
+/* Demo video */
+.demoVideo video {
+  width: 100%;
+  max-width: 640px; }
+
+.demoVideo canvas {
+  width: 100%;
+  max-width: 853px; }
