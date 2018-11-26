@@ -146,8 +146,8 @@
             }
             var isFirefox = typeof InstallTrigger !== 'undefined';
             if (ev.dataTransfer.items) {
-                if (ev.dataTransfer.items[fileItem].kind === 'file') {
-                    file = ev.dataTransfer.items[fileItem].getAsFile();
+                if (ev.dataTransfer.items[0].kind === 'file') {
+                    file = ev.dataTransfer.items[0].getAsFile();
                 } else if (ev.dataTransfer.items[fileItem].kind === 'string') {
                     file = ev.dataTransfer.items[fileItem].getAsString((url) => {
                         // console.log(file);
