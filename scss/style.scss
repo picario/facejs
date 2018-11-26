@@ -1,8 +1,38 @@
 /* Main styling */
 main {
   min-height: calc(100vh - 308px);
+  padding-left: 71px;
+  margin-top: 102px;
 }
-
+nav div {
+  margin-left: 55px;
+}
+@media (max-width: 991.98px) {
+  main {
+    padding-left: 46px;
+  }
+  nav div {
+    margin-left: 30px;
+  }
+}
+@media (max-width: 991.98px) {
+  main {
+    padding: 0 20px;
+  }
+  nav div {
+    margin-left: 4px;
+  }
+}
+.bg-light {
+  background-color: #ECECEC !important;
+}
+.btn-primary {
+  background-color: #0D599B;
+  border-color: #0D599B;
+}
+.no-padding {
+  padding: 0;
+}
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: bold;
@@ -17,17 +47,12 @@ p {
   font-size: 19px;
   margin-bottom: 0;
 }
-nav div {
-  margin-left: 30px;
-}
 .navbar-brand h3{
   font-size: 40px;
   color: black;
   margin-bottom: 2px;
 }
-main {
-  margin-top: 102px;
-}
+
 p.options {
   color: black;
   @media (max-width: 391px) {
@@ -81,7 +106,7 @@ section.home {
   .demoPicture {
     margin-right: 25px;
     height: 175px;
-    width: 275px !important;
+    width: 275px ;
     min-width: 275px;
     background-repeat:no-repeat;
     background-size: cover;
@@ -111,14 +136,18 @@ section.home {
 @media (max-width: 991.98px) {
   section.home {
     height: auto;
-    .demoPicture {
-      height: 250px;
-      flex: 0 0 100% !important;
-      max-width: 100% !important;
+    a.demolink {
+      width: 100%;
+      .demoPicture {
+        height: 250px;
+        flex: 0 0 100% !important;
+        width: 100%;
+        max-width: 550px !important;
+      }
     }
     .demoInfo {
       flex: 0 0 100% !important;
-      max-width: 100% !important;
+      max-width: 550px !important;
       margin-top: 20px;
       height: 180px;
     }   
@@ -235,15 +264,16 @@ main.dragdrop {
 }
 
 /* Scene2scene */
-.scene2scene {
-  margin-top: 0 !important;
+main.scene2scene {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 .full {
- display:block;
-   width:100%;
-   height:100%;
-   position: absolute;
-   z-index: -1;
+  display: block;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -1;
 }
 .nav-trans {
    filter: alpha(opacity=80);
@@ -283,6 +313,8 @@ main.dragdrop {
   video {
     width: 100%;
     max-width: 640px;
+    display: block;
+    margin-bottom: 16px;
   }
   
   canvas {

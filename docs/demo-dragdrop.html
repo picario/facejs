@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <main class="dragdrop container">
+    <main class="dragdrop">
         
         <!-- <h3>FaceJS <span class="text-muted">drag and drop</span></h3> -->
         <div class="row ml-0">
@@ -139,16 +139,24 @@
             ev.preventDefault();
             var file;
             var url;
+            var fileItem = 0;
+            var isFirefox = typeof InstallTrigger !== 'undefined';
+            if (isFirefox) {
+                fileItem = 1;
+            }
+            var isFirefox = typeof InstallTrigger !== 'undefined';
             if (ev.dataTransfer.items) {
-                if (ev.dataTransfer.items[0].kind === 'file') {
-                    file = ev.dataTransfer.items[0].getAsFile();
-                } else if (ev.dataTransfer.items[0].type === 'text/plain') {
-                    file = ev.dataTransfer.items[0].getAsString((url) => {
+                if (ev.dataTransfer.items[fileItem].kind === 'file') {
+                    file = ev.dataTransfer.items[fileItem].getAsFile();
+                } else if (ev.dataTransfer.items[fileItem].kind === 'string') {
+                    file = ev.dataTransfer.items[fileItem].getAsString((url) => {
+                        // console.log(file);
                         if(url){
                             let dropObject = container.getObjectFromEvent(ev);
                             dropObject.sizeMode = 1;
                             if (dropObject) {
                                 dropObject.loadTextureFromUrl(url).then(() => {
+                                    console.log(url);
                                 }).catch((err) =>{
                                     console.log(JSON.stringify(err));
                                 });

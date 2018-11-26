@@ -23,7 +23,7 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="">
         <div class="row ml-0">
                 <p class="options"><i class="fas fa-undo"></i> Rotation </p><p class="options pr-3"><i class="fas fa-arrows-alt pl-3"></i> Move your logo </p><p class="options"><i class="fas fa-arrows-alt-v"></i> Zoom in / Zoom out</p>
         </div>
@@ -139,15 +139,18 @@
         }
 
         function drawRandomColors() {
-            if (items.length>0) 
-            {
-                let index = Math.trunc(Math.random() *items.length);
-                let mycon = items[index];
-                mycon.objects[0].setColorByArgb(255,Math.round(Math.random()*255),Math.round(Math.random()*255),Math.round(Math.random()*255));
-            }
-            window.requestAnimationFrame(drawRandomColors);
+            setTimeout(() => {
+                if (items.length>0) 
+                {
+                    
+                    let index = Math.trunc(Math.random() *items.length);
+                    let mycon = items[index];
+                    mycon.objects[0].setColorByArgb(255,Math.round(Math.random()*255),Math.round(Math.random()*255),Math.round(Math.random()*255));
+                }
+                window.requestAnimationFrame(drawRandomColors);
+            }, 2000);
         };
-
+        
         start();
         drawRandomColors();
     </script>
