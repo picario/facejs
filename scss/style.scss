@@ -265,15 +265,10 @@ main.dragdrop {
 
 /* Scene2scene */
 main.scene2scene {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-.full {
-  display: block;
-  min-width: 100vw;
-  min-height: 100vh;
-  z-index: -1;
+  .full {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
 }
 .nav-trans {
    filter: alpha(opacity=80);
@@ -321,4 +316,17 @@ main.scene2scene {
     width: 100%;
     max-width: 853px;
   }
+}
+
+/* fullscreen demo */
+main.fullscreen {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+.full {
+  display: block;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -1;
 }
