@@ -209,7 +209,8 @@ main.dragdrop .dragdropimages {
     main.dragdrop .dragdropimages p i {
       font-size: 20px; }
 
-main.dragdrop img {
+main.dragdrop .textures img {
+  cursor: pointer;
   width: 100px;
   height: 100px; }
 

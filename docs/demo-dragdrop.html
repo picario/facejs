@@ -31,12 +31,12 @@
         </div>
         <p>Hier kan dan een kort beschrijving staan van de demo. Vertel even wat er allemaal kan. Visual vloeren met behoud van reflectie, schaduw etc.</p>
         
-        <div class="no-margin row">
+        <div class="textures no-margin row">
             <canvas id="mycanvas" class="fullscreenDemo" width="1060px" height="640px" oncontextmenu="event.preventDefault();"></canvas>
             <div class="dragdropimages">
-                <p><img src="img/floor1.png" alt="floor"></p>
-                <p><img src="img/floor2.png" alt="floor"></p>
-                <p><img src="img/floor3.png" alt="floor"></p>
+                <p><img src="img/floor1.png" alt="floor" onclick="setTexture(this)"></p>
+                <p><img src="img/floor2.png" alt="floor" onclick="setTexture(this)"></p>
+                <p><img src="img/floor3.png" alt="floor" onclick="setTexture(this)"></p>
                 <p class="options"><i class="fas fa-mouse-pointer"></i> Drag & Drop your local images </p>
             </div>
         </div>
@@ -135,6 +135,13 @@
             container.canvas.addEventListener("dragover", dragOverHandler);
         }
 
+        async function setTexture(texture) {
+            if(texture) {
+                container.objects[0].sizeMode = 1;
+                await container.objects[0].loadTextureFromUrl(texture.src);
+            }         
+        }
+
         function dropHandler(ev) {
             ev.preventDefault();
             var file;
@@ -156,7 +163,6 @@
                             dropObject.sizeMode = 1;
                             if (dropObject) {
                                 dropObject.loadTextureFromUrl(url).then(() => {
-                                    console.log(url);
                                 }).catch((err) =>{
                                     console.log(JSON.stringify(err));
                                 });
