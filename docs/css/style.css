@@ -212,7 +212,8 @@ main.dragdrop .dragdropimages {
 main.dragdrop .textures img {
   cursor: pointer;
   width: 100px;
-  height: 100px; }
+  height: 100px;
+  object-fit: cover; }
 
 /* Logo */
 .demoLogo img {
